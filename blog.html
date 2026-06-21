@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>日録 ── 国芳帖</title>
+<meta name="description" content="歌川国芳をめぐる学習記録。日付と一言だけを残す日録。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700;800&family=Noto+Serif+JP:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --sumi:#1d1c1a;
+    --ink:#2a2824;
+    --ink-soft:#5e5b54;
+    --paper:#e7e4de;
+    --paper-deep:#d7d3ca;
+    --paper-line:#c4bfb4;
+    --red:#a32a1f;
+    --red-deep:#7e2017;
+    --red-bright:#c43c28;
+    --max:1120px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"Noto Serif JP", serif;
+    line-height:1.9;
+    -webkit-font-smoothing:antialiased;
+  }
+  body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:0;
+    background-image:
+      repeating-linear-gradient(0deg, rgba(0,0,0,0.015) 0px, rgba(0,0,0,0.015) 1px, transparent 1px, transparent 3px),
+      repeating-linear-gradient(90deg, rgba(0,0,0,0.012) 0px, rgba(0,0,0,0.012) 1px, transparent 1px, transparent 3px);
+  }
+
+  a{color:inherit; text-decoration:none;}
+  h1,h2,h3{
+    font-family:"Shippori Mincho", serif;
+    font-weight:800;
+    margin:0;
+    color:var(--sumi);
+  }
+  .eyebrow{
+    font-family:"Cormorant Garamond", serif;
+    font-style:italic;
+    font-size:0.95rem;
+    letter-spacing:0.14em;
+    color:var(--red-deep);
+    margin:0 0 0.6em;
+  }
+  .wrap{max-width:var(--max); margin:0 auto; padding:0 28px;}
+
+  .seal{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:1.5em;
+    height:1.5em;
+    background:var(--red);
+    color:var(--paper);
+    font-family:"Shippori Mincho", serif;
+    font-size:0.85em;
+    font-weight:700;
+    border-radius:2px;
+    margin-right:0.45em;
+    transform:translateY(-0.05em) rotate(-2deg);
+    box-shadow:0 1px 0 rgba(0,0,0,0.25);
+  }
+
+  /* ---------- header (shared) ---------- */
+  .site-header{
+    position:sticky; top:0; z-index:40;
+    background:rgba(231,228,222,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--paper-line);
+  }
+  .header-inner{
+    max-width:var(--max); margin:0 auto; padding:14px 28px;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .brand{display:flex; align-items:center; gap:12px;}
+  .brand-seal{
+    width:38px; height:38px; flex:none;
+    background:var(--red);
+    color:var(--paper);
+    display:flex; align-items:center; justify-content:center;
+    font-family:"Shippori Mincho", serif; font-weight:800; font-size:1.15rem;
+    border-radius:3px;
+  }
+  .brand-text{font-family:"Shippori Mincho", serif; font-weight:800; font-size:1.15rem; color:var(--sumi); line-height:1.2;}
+  .brand-en{
+    display:block; font-family:"Cormorant Garamond", serif; font-style:italic;
+    font-weight:500; font-size:0.68rem; letter-spacing:0.16em; color:var(--ink-soft);
+  }
+  .site-nav{display:flex; gap:2px;}
+  .site-nav a{
+    font-family:"Shippori Mincho", serif;
+    font-size:0.95rem;
+    padding:8px 16px;
+    border-bottom:2px solid transparent;
+    color:var(--ink-soft);
+    transition:color .2s ease, border-color .2s ease;
+  }
+  .site-nav a:hover, .site-nav a:focus-visible{color:var(--sumi);}
+  .site-nav a.active{color:var(--red); border-color:var(--red);}
+  .nav-toggle{display:none;}
+
+  /* ---------- page head ---------- */
+  .page-head{padding:56px 0 36px;}
+  .page-head h1{
+    font-size:clamp(1.9rem, 4vw, 2.6rem);
+    display:flex;
+    align-items:center;
+  }
+  .page-head .lede{
+    max-width:62ch;
+    color:var(--ink-soft);
+    margin-top:18px;
+    font-size:1.02rem;
+  }
+
+  /* ---------- diary feed ---------- */
+  .diary-section{padding:0 0 80px;}
+  .timeline{
+    position:relative;
+    max-width:680px;
+    padding-left:30px;
+  }
+  .timeline::before{
+    content:"";
+    position:absolute;
+    left:5px; top:6px; bottom:6px;
+    width:1px;
+    background:var(--paper-line);
+  }
+  .entry{
+    position:relative;
+    padding:0 0 34px;
+  }
+  .entry::before{
+    content:"";
+    position:absolute;
+    left:-30px; top:6px;
+    width:11px; height:11px;
+    background:var(--paper);
+    border:2px solid var(--red);
+    border-radius:50%;
+  }
+  .entry time{
+    display:block;
+    font-family:"Cormorant Garamond", serif;
+    font-style:italic;
+    font-size:0.95rem;
+    letter-spacing:0.08em;
+    color:var(--red-deep);
+    margin-bottom:8px;
+  }
+  .entry p{
+    margin:0;
+    font-size:1.02rem;
+    color:var(--ink);
+  }
+  .entry:not(:last-child){
+    border-bottom:1px solid var(--paper-line);
+  }
+
+  .diary-foot-note{
+    max-width:680px;
+    margin-top:8px;
+    padding-left:30px;
+    font-family:"Cormorant Garamond", serif;
+    font-style:italic;
+    font-size:0.85rem;
+    color:var(--ink-soft);
+  }
+
+  /* ---------- footer (shared) ---------- */
+  .site-footer{
+    border-top:1px solid var(--paper-line);
+    background:var(--paper-deep);
+    padding:40px 0 28px;
+  }
+  .footer-inner{
+    max-width:var(--max); margin:0 auto; padding:0 28px;
+    display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:24px;
+  }
+  .footer-nav{display:flex; gap:18px; flex-wrap:wrap;}
+  .footer-nav a{font-size:0.9rem; color:var(--ink-soft); border-bottom:1px solid transparent;}
+  .footer-nav a:hover{color:var(--red); border-color:var(--red);}
+  .footer-credit{
+    font-family:"Cormorant Garamond", serif;
+    font-style:italic;
+    font-size:0.82rem;
+    color:var(--ink-soft);
+    letter-spacing:0.04em;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{transition:none !important;}
+  }
+
+  @media (max-width:680px){
+    .site-nav{
+      position:fixed; top:66px; right:0; left:0;
+      background:var(--paper);
+      border-bottom:1px solid var(--paper-line);
+      flex-direction:column;
+      padding:8px 28px 16px;
+      display:none;
+    }
+    .site-nav.open{display:flex;}
+    .site-nav a{padding:10px 4px; border-bottom:1px solid var(--paper-line);}
+    .nav-toggle{
+      display:block;
+      background:none; border:1px solid var(--sumi);
+      width:38px; height:38px;
+      color:var(--sumi);
+      font-size:1.1rem;
+      cursor:pointer;
+    }
+    .timeline{padding-left:22px;}
+    .entry::before{left:-22px;}
+    .diary-foot-note{padding-left:22px;}
+    .footer-inner{flex-direction:column; align-items:flex-start;}
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="index.html">
+      <span class="brand-seal" aria-hidden="true">芳</span>
+      <span class="brand-text">国芳帖<span class="brand-en">A KUNIYOSHI NOTEBOOK</span></span>
+    </a>
+    <nav class="site-nav" id="siteNav">
+      <a href="index.html">表紙</a>
+      <a href="gallery.html">画帖</a>
+      <a href="blog.html" class="active">日録</a>
+      <a href="about.html">来歴</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="メニューを開く" aria-expanded="false">☰</button>
+  </div>
+</header>
+
+<section class="page-head">
+  <div class="wrap">
+    <p class="eyebrow">DIARY LOG</p>
+    <h1><span class="seal" aria-hidden="true">四</span>日録</h1>
+    <p class="lede">国芳について学んだことを、その都度ここに置いていきます。肩書きも顔も出さず、日付と一言だけ――古典の日記文学にならった、ごく短い記録です。</p>
+  </div>
+</section>
+
+<section class="diary-section">
+  <div class="wrap">
+    <div class="timeline">
+
+      <article class="entry">
+        <time datetime="2026-06-21">2026.06.21</time>
+        <p>「画帖」をひとまず公開。猫の絵を真似して描いてみたけど、輪郭線の強弱がまるで違う。もっと観察しないと。</p>
+      </article>
+
+      <article class="entry">
+        <time datetime="2026-06-15">2026.06.15</time>
+        <p>国芳の猫の絵をまとめて見返す。擬人化されているのに、ちゃんと猫の体つきをしているバランス感覚がすごい。</p>
+      </article>
+
+      <article class="entry">
+        <time datetime="2026-06-09">2026.06.09</time>
+        <p>「通俗水滸伝豪傑百八人」のうち数枚を模写。体のひねりがまったく再現できなくて悔しい。明日もやる。</p>
+      </article>
+
+      <article class="entry">
+        <time datetime="2026-06-02">2026.06.02</time>
+        <p>図書館で国芳の画集を借りる。解説を読みながら、自分用の簡単な年表を作り始めた。</p>
+      </article>
+
+      <article class="entry">
+        <time datetime="2026-05-27">2026.05.27</time>
+        <p>妖怪画の構図をメモ。骨の表現が作品ごとに全然違っていて面白い。</p>
+      </article>
+
+      <article class="entry">
+        <time datetime="2026-05-20">2026.05.20</time>
+        <p>このサイトを作り始めた。まずは表紙のレイアウトから。</p>
+      </article>
+
+    </div>
+    <p class="diary-foot-note">※ 新しい記録は上に追加していきます。</p>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <nav class="footer-nav">
+      <a href="index.html">表紙</a>
+      <a href="gallery.html">画帖</a>
+      <a href="blog.html">日録</a>
+      <a href="about.html">来歴</a>
+    </nav>
+    <p class="footer-credit">A fan-made notebook on Utagawa Kuniyoshi, kept by Azalea72.</p>
+  </div>
+</footer>
+
+<script>
+  const navToggle = document.getElementById('navToggle');
+  const siteNav = document.getElementById('siteNav');
+  navToggle.addEventListener('click', () => {
+    const open = siteNav.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', open);
+  });
+</script>
+
+</body>
+</html>
