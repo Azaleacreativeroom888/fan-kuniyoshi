@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>画帖 ── 国芳帖</title>
+<meta name="description" content="漫画とイラストを分け隔てなく綴じた画帖。歌川国芳をめぐる手控えサイト「国芳帖」のギャラリーページ。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700;800&family=Noto+Serif+JP:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --sumi:#1d1c1a;
+    --ink:#2a2824;
+    --ink-soft:#5e5b54;
+    --paper:#e7e4de;
+    --paper-deep:#d7d3ca;
+    --paper-line:#c4bfb4;
+    --red:#a32a1f;
+    --red-deep:#7e2017;
+    --red-bright:#c43c28;
+    --max:1120px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"Noto Serif JP", serif;
+    line-height:1.9;
+    -webkit-font-smoothing:antialiased;
+  }
+  body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:0;
+    background-image:
+      repeating-linear-gradient(0deg, rgba(0,0,0,0.015) 0px, rgba(0,0,0,0.015) 1px, transparent 1px, transparent 3px),
+      repeating-linear-gradient(90deg, rgba(0,0,0,0.012) 0px, rgba(0,0,0,0.012) 1px, transparent 1px, transparent 3px);
+  }
+
+  a{color:inherit; text-decoration:none;}
+  h1,h2,h3{
+    font-family:"Shippori Mincho", serif;
+    font-weight:800;
+    margin:0;
+    color:var(--sumi);
+  }
+  .eyebrow{
+    font-family:"Cormorant Garamond", serif;
+    font-style:italic;
+    font-size:0.95rem;
+    letter-spacing:0.14em;
+    color:var(--red-deep);
+    margin:0 0 0.6em;
+  }
+  .wrap{max-width:var(--max); margin:0 auto; padding:0 28px;}
+
+  .seal{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:1.5em;
+    height:1.5em;
+    background:var(--red);
+    color:var(--paper);
+    font-family:"Shippori Mincho", serif;
+    font-size:0.85em;
+    font-weight:700;
+    border-radius:2px;
+    margin-right:0.45em;
+    transform:translateY(-0.05em) rotate(-2deg);
+    box-shadow:0 1px 0 rgba(0,0,0,0.25);
+  }
+
+  /* ---------- header (shared) ---------- */
+  .site-header{
+    position:sticky; top:0; z-index:40;
+    background:rgba(231,228,222,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--paper-line);
+  }
+  .header-inner{
+    max-width:var(--max); margin:0 auto; padding:14px 28px;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .brand{display:flex; align-items:center; gap:12px;}
+  .brand-seal{
+    width:38px; height:38px; flex:none;
+    background:var(--red);
+    color:var(--paper);
+    display:flex; align-items:center; justify-content:center;
+    font-family:"Shippori Mincho", serif; font-weight:800; font-size:1.15rem;
+    border-radius:3px;
+  }
+  .brand-text{font-family:"Shippori Mincho", serif; font-weight:800; font-size:1.15rem; color:var(--sumi); line-height:1.2;}
+  .brand-en{
+    display:block; font-family:"Cormorant Garamond", serif; font-style:italic;
+    font-weight:500; font-size:0.68rem; letter-spacing:0.16em; color:var(--ink-soft);
+  }
+  .site-nav{display:flex; gap:2px;}
+  .site-nav a{
+    font-family:"Shippori Mincho", serif;
+    font-size:0.95rem;
+    padding:8px 16px;
+    border-bottom:2px solid transparent;
+    color:var(--ink-soft);
+    transition:color .2s ease, border-color .2s ease;
+  }
+  .site-nav a:hover, .site-nav a:focus-visible{color:var(--sumi);}
+  .site-nav a.active{color:var(--red); border-color:var(--red);}
+  .nav-toggle{display:none;}
+
+  /* ---------- page head ---------- */
+  .page-head{padding:56px 0 36px;}
+  .page-head h1{
+    font-size:clamp(1.9rem, 4vw, 2.6rem);
+    display:flex;
+    align-items:center;
+  }
+  .page-head .lede{
+    max-width:62ch;
+    color:var(--ink-soft);
+    margin-top:18px;
+    font-size:1.02rem;
+  }
+
+  /* ---------- gallery grid ---------- */
+  .gallery-section{padding:0 0 72px;}
+  .gallery-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(200px, 1fr));
+    grid-auto-rows:140px;
+    gap:14px;
+  }
+  .g-item{
+    position:relative;
+    cursor:pointer;
+    overflow:hidden;
+    background:var(--paper-deep);
+    border:1px solid var(--paper-line);
+  }
+  .g-item.tall{grid-row:span 2;}
+  .g-item.wide{grid-column:span 2;}
+  .g-item.big{grid-row:span 2; grid-column:span 2;}
+
+  .g-thumb{
+    position:absolute;
+    inset:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background-image:repeating-linear-gradient(135deg, rgba(29,28,26,0.05) 0 2px, transparent 2px 11px);
+    transition:transform .35s ease;
+  }
+  /* slightly different paper shades so the placeholder grid doesn't feel uniform */
+  .g-item:nth-child(3n) .g-thumb{background-color:rgba(29,28,26,0.02);}
+  .g-item:nth-child(3n+1) .g-thumb{background-color:rgba(163,42,31,0.03);}
+
+  .g-thumb img{
+    width:100%; height:100%;
+    object-fit:cover;
+    display:block;
+  }
+  .g-thumb .placeholder-mark{
+    writing-mode:vertical-rl;
+    text-orientation:upright;
+    font-family:"Shippori Mincho", serif;
+    color:var(--ink-soft);
+    letter-spacing:0.3em;
+    font-size:0.82rem;
+    opacity:0.7;
+  }
+  .g-item:hover .g-thumb{transform:scale(1.04);}
+
+  .g-caption{
+    position:absolute;
+    left:0; right:0; bottom:0;
+    padding:10px 12px;
+    background:linear-gradient(180deg, transparent, rgba(29,28,26,0.78) 78%);
+    color:var(--paper);
+    font-family:"Shippori Mincho", serif;
+    font-size:0.85rem;
+    opacity:0;
+    transform:translateY(6px);
+    transition:opacity .2s ease, transform .2s ease;
+  }
+  .g-item:hover .g-caption, .g-item:focus-visible .g-caption{opacity:1; transform:translateY(0);}
+  .g-item:focus-visible{outline:2px solid var(--red); outline-offset:2px;}
+
+  .gallery-note{
+    margin-top:22px;
+    font-family:"Cormorant Garamond", serif;
+    font-style:italic;
+    font-size:0.85rem;
+    color:var(--ink-soft);
+    letter-spacing:0.02em;
+  }
+
+  /* ---------- lightbox ---------- */
+  .lightbox{
+    position:fixed; inset:0; z-index:100;
+    background:rgba(20,19,17,0.92);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:32px;
+  }
+  .lightbox.open{display:flex;}
+  .lightbox-inner{
+    max-width:780px; width:100%;
+    max-height:88vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+  }
+  .lightbox-frame{
+    width:100%;
+    aspect-ratio:4/5;
+    background:var(--paper-deep);
+    display:flex; align-items:center; justify-content:center;
+    background-image:repeating-linear-gradient(135deg, rgba(231,228,222,0.06) 0 2px, transparent 2px 11px);
+    border:1px solid rgba(231,228,222,0.25);
+    position:relative;
+  }
+  .lightbox-frame img{width:100%; height:100%; object-fit:contain; display:block;}
+  .lightbox-frame .placeholder-mark{
+    writing-mode:vertical-rl;
+    text-orientation:upright;
+    font-family:"Shippori Mincho", serif;
+    color:var(--paper-deep);
+    letter-spacing:0.4em;
+    font-size:1.1rem;
+  }
+  .lightbox-caption{
+    color:var(--paper);
+    font-family:"Shippori Mincho", serif;
+    font-size:1.05rem;
+    margin-top:18px;
+    text-align:center;
+  }
+  .lightbox-controls{
+    position:absolute;
+    top:24px; right:28px;
+    display:flex; gap:10px;
+  }
+  .lb-btn{
+    background:transparent;
+    border:1px solid rgba(231,228,222,0.5);
+    color:var(--paper);
+    width:38px; height:38px;
+    cursor:pointer;
+    font-size:1.1rem;
+    transition:background .2s ease, border-color .2s ease;
+  }
+  .lb-btn:hover{background:var(--red); border-color:var(--red);}
+  .lb-btn:focus-visible{outline:2px solid var(--red); outline-offset:2px;}
+  .lb-nav{
+    position:fixed;
+    top:50%; transform:translateY(-50%);
+    background:transparent; border:none;
+    color:var(--paper);
+    font-size:2rem;
+    cursor:pointer;
+    padding:10px 16px;
+    opacity:0.7;
+    transition:opacity .2s ease;
+  }
+  .lb-nav:hover{opacity:1;}
+  .lb-prev{left:8px;}
+  .lb-next{right:8px;}
+
+  /* ---------- footer (shared) ---------- */
+  .site-footer{
+    border-top:1px solid var(--paper-line);
+    background:var(--paper-deep);
+    padding:40px 0 28px;
+  }
+  .footer-inner{
+    max-width:var(--max); margin:0 auto; padding:0 28px;
+    display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:24px;
+  }
+  .footer-nav{display:flex; gap:18px; flex-wrap:wrap;}
+  .footer-nav a{font-size:0.9rem; color:var(--ink-soft); border-bottom:1px solid transparent;}
+  .footer-nav a:hover{color:var(--red); border-color:var(--red);}
+  .footer-credit{
+    font-family:"Cormorant Garamond", serif;
+    font-style:italic;
+    font-size:0.82rem;
+    color:var(--ink-soft);
+    letter-spacing:0.04em;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{transition:none !important;}
+  }
+
+  @media (max-width:680px){
+    .site-nav{
+      position:fixed; top:66px; right:0; left:0;
+      background:var(--paper);
+      border-bottom:1px solid var(--paper-line);
+      flex-direction:column;
+      padding:8px 28px 16px;
+      display:none;
+    }
+    .site-nav.open{display:flex;}
+    .site-nav a{padding:10px 4px; border-bottom:1px solid var(--paper-line);}
+    .nav-toggle{
+      display:block;
+      background:none; border:1px solid var(--sumi);
+      width:38px; height:38px;
+      color:var(--sumi);
+      font-size:1.1rem;
+      cursor:pointer;
+    }
+    .gallery-grid{grid-auto-rows:120px;}
+    .g-item.big{grid-column:span 2; grid-row:span 2;}
+    .lb-nav{font-size:1.5rem; padding:8px 10px;}
+    .footer-inner{flex-direction:column; align-items:flex-start;}
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="index.html">
+      <span class="brand-seal" aria-hidden="true">芳</span>
+      <span class="brand-text">国芳帖<span class="brand-en">A KUNIYOSHI NOTEBOOK</span></span>
+    </a>
+    <nav class="site-nav" id="siteNav">
+      <a href="index.html">表紙</a>
+      <a href="gallery.html" class="active">画帖</a>
+      <a href="blog.html">日録</a>
+      <a href="about.html">来歴</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="メニューを開く" aria-expanded="false">☰</button>
+  </div>
+</header>
+
+<section class="page-head">
+  <div class="wrap">
+    <p class="eyebrow">GALLERY</p>
+    <h1><span class="seal" aria-hidden="true">参</span>画帖</h1>
+    <p class="lede">武者絵も猫絵も戯画も筆を選ばなかった国芳にならい、ここでは漫画とイラストをジャンルで区切らずに一冊の帖として綴じています。並び順はおおむね描いた順です。</p>
+  </div>
+</section>
+
+<section class="gallery-section">
+  <div class="wrap">
+
+    <!--
+      作品を追加する手順:
+      1. .g-item の中の .placeholder-mark を含む <span> を削除
+      2. 代わりに <img src="images/作品ファイル名.jpg" alt="作品の説明"> を追加
+      3. data-title はそのままキャプション・ライトボックスに使われます
+      サイズの目安: tall=縦長、wide=横長、big=縦横とも大きめ、無指定=正方形に近い枠
+    -->
+
+    <div class="gallery-grid" id="galleryGrid">
+
+      <figure class="g-item big" tabindex="0" data-title="武者、見得の構図">
+        <div class="g-thumb"><span class="placeholder-mark">準備中</span></div>
+        <figcaption class="g-caption">武者、見得の構図</figcaption>
+      </figure>
+
+      <figure class="g-item" tabindex="0" data-title="黒猫、丸くなる">
+        <div class="g-thumb"><span class="placeholder-mark">準備中</span></div>
+        <figcaption class="g-caption">黒猫、丸くなる</figcaption>
+      </figure>
+
+      <figure class="g-item tall" tabindex="0" data-title="連作扉絵ラフ">
+        <div class="g-thumb"><span class="placeholder-mark">準備中</span></div>
+        <figcaption class="g-caption">連作扉絵ラフ</figcaption>
+      </figure>
+
+      <figure class="g-item wide" tabindex="0" data-title="一コマ漫画:稽古">
+        <div class="g-thumb"><span class="placeholder-mark">準備中</span></div>
+        <figcaption class="g-caption">一コマ漫画:稽古</figcaption>
+      </figure>
+
+      <figure class="g-item" tabindex="0" data-title="猫又、習作">
+        <div class="g-thumb"><span class="placeholder-mark">準備中</span></div>
+        <figcaption class="g-caption">猫又、習作</figcaption>
+      </figure>
+
+      <figure class="g-item tall" tabindex="0" data-title="妖怪、らくがき">
+        <div class="g-thumb"><span class="placeholder-mark">準備中</span></div>
+        <figcaption class="g-caption">妖怪、らくがき</figcaption>
+      </figure>
+
+      <figure class="g-item" tabindex="0" data-title="浪、習作">
+        <div class="g-thumb"><span class="placeholder-mark">準備中</span></div>
+        <figcaption class="g-caption">浪、習作</figcaption>
+      </figure>
+
+      <figure class="g-item wide" tabindex="0" data-title="漫画扉絵 下描き">
+        <div class="g-thumb"><span class="placeholder-mark">準備中</span></div>
+        <figcaption class="g-caption">漫画扉絵 下描き</figcaption>
+      </figure>
+
+      <figure class="g-item" tabindex="0" data-title="群像構図メモ">
+        <div class="g-thumb"><span class="placeholder-mark">準備中</span></div>
+        <figcaption class="g-caption">群像構図メモ</figcaption>
+      </figure>
+
+      <figure class="g-item tall" tabindex="0" data-title="キャラクターデザイン">
+        <div class="g-thumb"><span class="placeholder-mark">準備中</span></div>
+        <figcaption class="g-caption">キャラクターデザイン</figcaption>
+      </figure>
+
+    </div>
+
+    <p class="gallery-note">各作品をクリック、またはEnterキーで拡大表示します。</p>
+  </div>
+</section>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="作品の拡大表示">
+  <button class="lb-nav lb-prev" id="lbPrev" aria-label="前の作品">‹</button>
+  <div class="lightbox-inner">
+    <div class="lightbox-frame">
+      <div class="lightbox-controls">
+        <button class="lb-btn" id="lbClose" aria-label="閉じる">×</button>
+      </div>
+      <span class="placeholder-mark" id="lbPlaceholder">準備中</span>
+      <img id="lbImg" alt="" style="display:none;">
+    </div>
+    <p class="lightbox-caption" id="lbCaption"></p>
+  </div>
+  <button class="lb-nav lb-next" id="lbNext" aria-label="次の作品">›</button>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <nav class="footer-nav">
+      <a href="index.html">表紙</a>
+      <a href="gallery.html">画帖</a>
+      <a href="blog.html">日録</a>
+      <a href="about.html">来歴</a>
+    </nav>
+    <p class="footer-credit">A fan-made notebook on Utagawa Kuniyoshi, kept by Azalea72.</p>
+  </div>
+</footer>
+
+<script>
+  const navToggle = document.getElementById('navToggle');
+  const siteNav = document.getElementById('siteNav');
+  navToggle.addEventListener('click', () => {
+    const open = siteNav.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', open);
+  });
+
+  // ---- lightbox ----
+  const items = Array.from(document.querySelectorAll('.g-item'));
+  const lightbox = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lbImg');
+  const lbPlaceholder = document.getElementById('lbPlaceholder');
+  const lbCaption = document.getElementById('lbCaption');
+  const lbClose = document.getElementById('lbClose');
+  const lbPrev = document.getElementById('lbPrev');
+  const lbNext = document.getElementById('lbNext');
+  let current = 0;
+  let lastFocused = null;
+
+  function renderItem(index){
+    const item = items[index];
+    const title = item.dataset.title || '';
+    const img = item.querySelector('img');
+    lbCaption.textContent = title;
+    if(img && img.getAttribute('src')){
+      lbImg.src = img.getAttribute('src');
+      lbImg.alt = title;
+      lbImg.style.display = 'block';
+      lbPlaceholder.style.display = 'none';
+    } else {
+      lbImg.style.display = 'none';
+      lbPlaceholder.style.display = 'block';
+    }
+  }
+
+  function openLightbox(index){
+    current = index;
+    lastFocused = document.activeElement;
+    renderItem(current);
+    lightbox.classList.add('open');
+    lbClose.focus();
+  }
+
+  function closeLightbox(){
+    lightbox.classList.remove('open');
+    if(lastFocused) lastFocused.focus();
+  }
+
+  function step(delta){
+    current = (current + delta + items.length) % items.length;
+    renderItem(current);
+  }
+
+  items.forEach((item, i) => {
+    item.addEventListener('click', () => openLightbox(i));
+    item.addEventListener('keydown', (e) => {
+      if(e.key === 'Enter' || e.key === ' '){
+        e.preventDefault();
+        openLightbox(i);
+      }
+    });
+  });
+
+  lbClose.addEventListener('click', closeLightbox);
+  lbPrev.addEventListener('click', () => step(-1));
+  lbNext.addEventListener('click', () => step(1));
+
+  lightbox.addEventListener('click', (e) => {
+    if(e.target === lightbox) closeLightbox();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if(!lightbox.classList.contains('open')) return;
+    if(e.key === 'Escape') closeLightbox();
+    if(e.key === 'ArrowLeft') step(-1);
+    if(e.key === 'ArrowRight') step(1);
+  });
+</script>
+
+</body>
+</html>
