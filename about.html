@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>来歴 ── 国芳帖</title>
+<meta name="description" content="国芳帖について、運営者の紹介、関連サイトへのリンク、お問い合わせフォーム。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700;800&family=Noto+Serif+JP:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --sumi:#1d1c1a;
+    --ink:#2a2824;
+    --ink-soft:#5e5b54;
+    --paper:#e7e4de;
+    --paper-deep:#d7d3ca;
+    --paper-line:#c4bfb4;
+    --red:#a32a1f;
+    --red-deep:#7e2017;
+    --red-bright:#c43c28;
+    --max:1120px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"Noto Serif JP", serif;
+    line-height:1.9;
+    -webkit-font-smoothing:antialiased;
+  }
+  body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:0;
+    background-image:
+      repeating-linear-gradient(0deg, rgba(0,0,0,0.015) 0px, rgba(0,0,0,0.015) 1px, transparent 1px, transparent 3px),
+      repeating-linear-gradient(90deg, rgba(0,0,0,0.012) 0px, rgba(0,0,0,0.012) 1px, transparent 1px, transparent 3px);
+  }
+
+  a{color:inherit; text-decoration:none;}
+  h1,h2,h3{
+    font-family:"Shippori Mincho", serif;
+    font-weight:800;
+    margin:0;
+    color:var(--sumi);
+  }
+  .eyebrow{
+    font-family:"Cormorant Garamond", serif;
+    font-style:italic;
+    font-size:0.95rem;
+    letter-spacing:0.14em;
+    color:var(--red-deep);
+    margin:0 0 0.6em;
+  }
+  .wrap{max-width:var(--max); margin:0 auto; padding:0 28px;}
+
+  .seal{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:1.5em;
+    height:1.5em;
+    background:var(--red);
+    color:var(--paper);
+    font-family:"Shippori Mincho", serif;
+    font-size:0.85em;
+    font-weight:700;
+    border-radius:2px;
+    margin-right:0.45em;
+    transform:translateY(-0.05em) rotate(-2deg);
+    box-shadow:0 1px 0 rgba(0,0,0,0.25);
+  }
+
+  /* ---------- header (shared) ---------- */
+  .site-header{
+    position:sticky; top:0; z-index:40;
+    background:rgba(231,228,222,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--paper-line);
+  }
+  .header-inner{
+    max-width:var(--max); margin:0 auto; padding:14px 28px;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .brand{display:flex; align-items:center; gap:12px;}
+  .brand-seal{
+    width:38px; height:38px; flex:none;
+    background:var(--red);
+    color:var(--paper);
+    display:flex; align-items:center; justify-content:center;
+    font-family:"Shippori Mincho", serif; font-weight:800; font-size:1.15rem;
+    border-radius:3px;
+  }
+  .brand-text{font-family:"Shippori Mincho", serif; font-weight:800; font-size:1.15rem; color:var(--sumi); line-height:1.2;}
+  .brand-en{
+    display:block; font-family:"Cormorant Garamond", serif; font-style:italic;
+    font-weight:500; font-size:0.68rem; letter-spacing:0.16em; color:var(--ink-soft);
+  }
+  .site-nav{display:flex; gap:2px;}
+  .site-nav a{
+    font-family:"Shippori Mincho", serif;
+    font-size:0.95rem;
+    padding:8px 16px;
+    border-bottom:2px solid transparent;
+    color:var(--ink-soft);
+    transition:color .2s ease, border-color .2s ease;
+  }
+  .site-nav a:hover, .site-nav a:focus-visible{color:var(--sumi);}
+  .site-nav a.active{color:var(--red); border-color:var(--red);}
+  .nav-toggle{display:none;}
+
+  /* ---------- page head ---------- */
+  .page-head{padding:56px 0 30px;}
+  .page-head h1{
+    font-size:clamp(1.9rem, 4vw, 2.6rem);
+    display:flex;
+    align-items:center;
+  }
+  .page-head .lede{
+    max-width:62ch;
+    color:var(--ink-soft);
+    margin-top:18px;
+    font-size:1.02rem;
+  }
+
+  /* ---------- subsections ---------- */
+  .subsection{padding:46px 0;}
+  .subsection + .subsection{border-top:1px solid var(--paper-line);}
+  .subhead{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    margin-bottom:26px;
+  }
+  .subhead .eyebrow{margin:0;}
+  .subhead h2{font-size:1.25rem; white-space:nowrap;}
+  .subhead::after{
+    content:"";
+    flex:1;
+    height:1px;
+    background:linear-gradient(90deg, var(--paper-line), transparent);
+  }
+  .subhead-wrap{display:flex; flex-direction:column; gap:2px;}
+
+  /* ---------- profile ---------- */
+  .profile-text{max-width:62ch; color:var(--ink-soft); font-size:1.02rem;}
+  .profile-text strong{color:var(--sumi); font-weight:600;}
+
+  /* ---------- link directory ---------- */
+  .link-group{margin-bottom:30px;}
+  .link-group:last-child{margin-bottom:0;}
+  .link-group-title{
+    font-family:"Cormorant Garamond", serif;
+    font-style:italic;
+    font-size:0.9rem;
+    letter-spacing:0.08em;
+    color:var(--ink-soft);
+    margin-bottom:12px;
+  }
+  .link-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+  }
+  .link-card{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    background:var(--paper-deep);
+    border:1px solid var(--paper-line);
+    padding:14px 16px;
+    transition:border-color .2s ease, transform .15s ease, box-shadow .15s ease;
+  }
+  .link-card:hover, .link-card:focus-visible{
+    border-color:var(--red);
+    transform:translateY(-2px);
+    box-shadow:0 6px 14px rgba(29,28,26,0.1);
+  }
+  .link-mono{
+    flex:none;
+    width:40px; height:40px;
+    display:flex; align-items:center; justify-content:center;
+    background:var(--paper);
+    border:1px solid var(--sumi);
+    font-family:"Shippori Mincho", serif;
+    font-weight:700;
+    font-size:1rem;
+    color:var(--sumi);
+  }
+  .link-text{flex:1; min-width:0;}
+  .link-name{
+    display:block;
+    font-family:"Shippori Mincho", serif;
+    font-size:0.97rem;
+    color:var(--sumi);
+    margin-bottom:2px;
+  }
+  .link-desc{
+    display:block;
+    font-size:0.8rem;
+    color:var(--ink-soft);
+  }
+  .link-arrow{flex:none; color:var(--red); font-size:1.1rem; transition:transform .15s ease;}
+  .link-card:hover .link-arrow{transform:translateX(3px);}
+
+  /* ---------- contact form ---------- */
+  .form-card{
+    max-width:560px;
+    background:var(--paper-deep);
+    border:1px solid var(--paper-line);
+    padding:30px 30px 32px;
+  }
+  .form-intro{color:var(--ink-soft); font-size:0.95rem; margin-bottom:22px;}
+  .form-group{margin-bottom:18px;}
+  .form-label{
+    display:block;
+    font-family:"Shippori Mincho", serif;
+    font-size:0.88rem;
+    color:var(--sumi);
+    margin-bottom:6px;
+  }
+  .required{color:var(--red); margin-left:3px;}
+  .form-input, .form-textarea{
+    width:100%;
+    background:var(--paper);
+    border:1px solid var(--paper-line);
+    color:var(--ink);
+    font-family:"Noto Serif JP", serif;
+    font-size:0.92rem;
+    padding:10px 13px;
+    outline:none;
+    transition:border-color .2s ease, box-shadow .2s ease;
+  }
+  .form-input::placeholder, .form-textarea::placeholder{color:#a39e92;}
+  .form-input:focus, .form-textarea:focus{
+    border-color:var(--red);
+    box-shadow:0 0 0 3px rgba(163,42,31,0.1);
+  }
+  .form-textarea{resize:vertical; min-height:130px;}
+  .field-error{display:block; font-size:0.78rem; color:var(--red); margin-top:5px;}
+
+  .form-submit{
+    font-family:"Shippori Mincho", serif;
+    font-size:0.95rem;
+    background:var(--red);
+    border:1px solid var(--red);
+    color:var(--paper);
+    padding:12px 30px;
+    cursor:pointer;
+    margin-top:4px;
+    transition:background .2s ease, border-color .2s ease;
+  }
+  .form-submit:hover{background:var(--red-bright); border-color:var(--red-bright);}
+  .form-submit:disabled{opacity:.5; cursor:not-allowed;}
+  .form-submit:focus-visible{outline:2px solid var(--sumi); outline-offset:3px;}
+
+  .form-success{
+    background:var(--paper);
+    border-left:3px solid var(--red);
+    padding:14px 18px;
+    color:var(--ink);
+    font-size:0.92rem;
+    margin-bottom:18px;
+  }
+  .form-error-global{
+    background:var(--paper);
+    border-left:3px solid var(--red);
+    padding:12px 16px;
+    color:var(--red-deep);
+    font-size:0.88rem;
+    margin-bottom:16px;
+  }
+
+  /* ---------- rights note ---------- */
+  .rights-note{
+    padding:36px 0 8px;
+    border-top:1px solid var(--paper-line);
+  }
+  .rights-note p{
+    font-size:0.78rem;
+    color:var(--ink-soft);
+    line-height:1.85;
+    max-width:74ch;
+  }
+  .rights-note p + p{margin-top:8px;}
+
+  /* ---------- footer (shared) ---------- */
+  .site-footer{
+    border-top:1px solid var(--paper-line);
+    background:var(--paper-deep);
+    padding:40px 0 28px;
+  }
+  .footer-inner{
+    max-width:var(--max); margin:0 auto; padding:0 28px;
+    display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:24px;
+  }
+  .footer-nav{display:flex; gap:18px; flex-wrap:wrap;}
+  .footer-nav a{font-size:0.9rem; color:var(--ink-soft); border-bottom:1px solid transparent;}
+  .footer-nav a:hover{color:var(--red); border-color:var(--red);}
+  .footer-credit{
+    font-family:"Cormorant Garamond", serif;
+    font-style:italic;
+    font-size:0.82rem;
+    color:var(--ink-soft);
+    letter-spacing:0.04em;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{transition:none !important;}
+  }
+
+  @media (max-width:680px){
+    .site-nav{
+      position:fixed; top:66px; right:0; left:0;
+      background:var(--paper);
+      border-bottom:1px solid var(--paper-line);
+      flex-direction:column;
+      padding:8px 28px 16px;
+      display:none;
+    }
+    .site-nav.open{display:flex;}
+    .site-nav a{padding:10px 4px; border-bottom:1px solid var(--paper-line);}
+    .nav-toggle{
+      display:block;
+      background:none; border:1px solid var(--sumi);
+      width:38px; height:38px;
+      color:var(--sumi);
+      font-size:1.1rem;
+      cursor:pointer;
+    }
+    .link-grid{grid-template-columns:1fr;}
+    .form-card{padding:24px 20px 26px;}
+    .footer-inner{flex-direction:column; align-items:flex-start;}
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="index.html">
+      <span class="brand-seal" aria-hidden="true">芳</span>
+      <span class="brand-text">国芳帖<span class="brand-en">A KUNIYOSHI NOTEBOOK</span></span>
+    </a>
+    <nav class="site-nav" id="siteNav">
+      <a href="index.html">表紙</a>
+      <a href="gallery.html">画帖</a>
+      <a href="blog.html">日録</a>
+      <a href="about.html" class="active">来歴</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="メニューを開く" aria-expanded="false">☰</button>
+  </div>
+</header>
+
+<section class="page-head">
+  <div class="wrap">
+    <p class="eyebrow">ABOUT THIS NOTEBOOK</p>
+    <h1><span class="seal" aria-hidden="true">伍</span>来歴</h1>
+    <p class="lede">このノートを誰が、なぜ綴っているか。あわせて普段の発信先と、連絡先をまとめておきます。</p>
+  </div>
+</section>
+
+<section class="subsection">
+  <div class="wrap">
+    <div class="subhead">
+      <div class="subhead-wrap">
+        <span class="eyebrow">PROFILE</span>
+        <h2>紹介文</h2>
+      </div>
+    </div>
+    <p class="profile-text">
+      <strong>Azalea72(アザレア72)</strong>という名前で、漫画とイラストを描いています。普段は持ち込みを目標に作品づくりを続けながら、好きなものについての小さな学習サイトをいくつか運営しています。この「国芳帖」も、そのうちの一つです。
+    </p>
+    <p class="profile-text" style="margin-top:16px;">
+      美術史の専門家ではなく、一人の描き手・鑑賞者として国芳の作品に惹かれ、わかったことや気づいたことを書き留めています。ご指摘やご感想があれば、下記フォームからお気軽にどうぞ。
+    </p>
+  </div>
+</section>
+
+<section class="subsection">
+  <div class="wrap">
+    <div class="subhead">
+      <div class="subhead-wrap">
+        <span class="eyebrow">LINKS</span>
+        <h2>ウェブサイト</h2>
+      </div>
+    </div>
+
+    <div class="link-group">
+      <p class="link-group-title">漫画・イラスト掲載サイト</p>
+      <div class="link-grid">
+
+        <a class="link-card" href="https://rookie.shonenjump.com/users/14728546961183734555" target="_blank" rel="noopener">
+          <span class="link-mono" aria-hidden="true">漫</span>
+          <span class="link-text">
+            <span class="link-name">ジャンプルーキー</span>
+            <span class="link-desc">オリジナル漫画を掲載中</span>
+          </span>
+          <span class="link-arrow" aria-hidden="true">›</span>
+        </a>
+
+        <a class="link-card" href="https://daysneo.com/author/Sam333333Sam/" target="_blank" rel="noopener">
+          <span class="link-mono" aria-hidden="true">D</span>
+          <span class="link-text">
+            <span class="link-name">DaysNEO</span>
+            <span class="link-desc">漫画掲載サイト</span>
+          </span>
+          <span class="link-arrow" aria-hidden="true">›</span>
+        </a>
+
+        <a class="link-card" href="https://www.pixiv.net/users/105728284" target="_blank" rel="noopener">
+          <span class="link-mono" aria-hidden="true">P</span>
+          <span class="link-text">
+            <span class="link-name">Pixiv</span>
+            <span class="link-desc">二次創作はこちらに掲載</span>
+          </span>
+          <span class="link-arrow" aria-hidden="true">›</span>
+        </a>
+
+      </div>
+    </div>
+
+    <div class="link-group">
+      <p class="link-group-title">SNS・その他</p>
+      <div class="link-grid">
+
+        <a class="link-card" href="https://bsky.app/profile/azaleaazalea88.bsky.social" target="_blank" rel="noopener">
+          <span class="link-mono" aria-hidden="true">蒼</span>
+          <span class="link-text">
+            <span class="link-name">Bluesky</span>
+            <span class="link-desc">近況・作品のお知らせ</span>
+          </span>
+          <span class="link-arrow" aria-hidden="true">›</span>
+        </a>
+
+        <a class="link-card" href="https://kakuyomu.jp/users/azalea_azalea72" target="_blank" rel="noopener">
+          <span class="link-mono" aria-hidden="true">文</span>
+          <span class="link-text">
+            <span class="link-name">カクヨム</span>
+            <span class="link-desc">小説を掲載中</span>
+          </span>
+          <span class="link-arrow" aria-hidden="true">›</span>
+        </a>
+
+        <a class="link-card" href="https://www.youtube.com/@LilyPopins0512" target="_blank" rel="noopener">
+          <span class="link-mono" aria-hidden="true">映</span>
+          <span class="link-text">
+            <span class="link-name">YouTube(リリポピ)</span>
+            <span class="link-desc">動画チャンネル</span>
+          </span>
+          <span class="link-arrow" aria-hidden="true">›</span>
+        </a>
+
+        <a class="link-card" href="https://lilipopi.github.io/lilypopins/" target="_blank" rel="noopener">
+          <span class="link-mono" aria-hidden="true">リ</span>
+          <span class="link-text">
+            <span class="link-name">リリポピのHP</span>
+            <span class="link-desc">別サイト</span>
+          </span>
+          <span class="link-arrow" aria-hidden="true">›</span>
+        </a>
+
+      </div>
+    </div>
+
+    <div class="link-group">
+      <p class="link-group-title">関連ホームページ</p>
+      <div class="link-grid">
+
+        <a class="link-card" href="https://azaleacreativeroom888.github.io/fan-english/" target="_blank" rel="noopener">
+          <span class="link-mono" aria-hidden="true">EN</span>
+          <span class="link-text">
+            <span class="link-name">English Site</span>
+            <span class="link-desc">英語話者・学習者向けサイト</span>
+          </span>
+          <span class="link-arrow" aria-hidden="true">›</span>
+        </a>
+
+        <a class="link-card" href="https://azaleacreativeroom888.github.io/fan-watercolor/" target="_blank" rel="noopener">
+          <span class="link-mono" aria-hidden="true">彩</span>
+          <span class="link-text">
+            <span class="link-name">水彩画サイト</span>
+            <span class="link-desc">水彩画掲載</span>
+          </span>
+          <span class="link-arrow" aria-hidden="true">›</span>
+        </a>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="subsection">
+  <div class="wrap">
+    <div class="subhead">
+      <div class="subhead-wrap">
+        <span class="eyebrow">CONTACT</span>
+        <h2>お問い合わせ</h2>
+      </div>
+    </div>
+
+    <div class="form-card">
+      <p class="form-intro">ご質問・ご感想などはこちらからどうぞ。Gmailで受け取り、返信いたします。</p>
+
+      <div data-fs-success class="form-success" style="display:none;">
+        メッセージを送信しました。ありがとうございます。
+      </div>
+
+      <div data-fs-error class="form-error-global" style="display:none;"></div>
+
+      <form id="contact-form" action="https://formspree.io/f/maqvpvoz" method="POST">
+
+        <div class="form-group">
+          <label class="form-label" for="name">お名前</label>
+          <input class="form-input" type="text" id="name" name="name" placeholder="Azalea72" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="email">メールアドレス<span class="required">*</span></label>
+          <input class="form-input" type="email" id="email" name="email" data-fs-field placeholder="example@email.com" required>
+          <span data-fs-error="email" class="field-error"></span>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="message">メッセージ<span class="required">*</span></label>
+          <textarea class="form-textarea" id="message" name="message" data-fs-field placeholder="メッセージを入力してください…" rows="6" required></textarea>
+          <span data-fs-error="message" class="field-error"></span>
+        </div>
+
+        <button class="form-submit" type="submit" data-fs-submit-btn>
+          送信する
+        </button>
+
+      </form>
+    </div>
+  </div>
+</section>
+
+<section class="rights-note">
+  <div class="wrap">
+    <p>当サイトに掲載されている画像・文章・作品について、AI学習への利用、トレース(トレパク)、無断転載・転載、二次利用を禁止します。スクリーンショットの転載・無断引用はご遠慮ください。</p>
+    <p>Please refrain from using any images, text, or works on this website for AI training, tracing, unauthorized reproduction, redistribution, or secondary use.</p>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <nav class="footer-nav">
+      <a href="index.html">表紙</a>
+      <a href="gallery.html">画帖</a>
+      <a href="blog.html">日録</a>
+      <a href="about.html">来歴</a>
+    </nav>
+    <p class="footer-credit">A fan-made notebook on Utagawa Kuniyoshi, kept by Azalea72.</p>
+  </div>
+</footer>
+
+<script>
+  const navToggle = document.getElementById('navToggle');
+  const siteNav = document.getElementById('siteNav');
+  navToggle.addEventListener('click', () => {
+    const open = siteNav.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', open);
+  });
+
+  window.formspree = window.formspree || function () { (formspree.q = formspree.q || []).push(arguments); };
+  formspree('initForm', { formElement: '#contact-form', formId: 'maqvpvoz' });
+</script>
+<script src="https://unpkg.com/@formspree/ajax@1" defer></script>
+
+</body>
+</html>
