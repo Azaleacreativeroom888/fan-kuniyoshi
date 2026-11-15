@@ -201,6 +201,65 @@
     letter-spacing:0.02em;
   }
 
+  /* ---------- report link box ---------- */
+  .report-link{
+    display:flex;
+    align-items:stretch;
+    margin-top:56px;
+    background:var(--paper-deep);
+    border:1px solid var(--paper-line);
+    transition:border-color .2s ease, transform .15s ease, box-shadow .15s ease;
+  }
+  .report-link:hover, .report-link:focus-visible{
+    border-color:var(--red);
+    transform:translateY(-2px);
+    box-shadow:0 8px 18px rgba(29,28,26,0.12);
+  }
+  .report-link:focus-visible{outline:2px solid var(--red); outline-offset:3px;}
+  .report-tab{
+    flex:none;
+    width:64px;
+    background:linear-gradient(180deg, var(--red) 0%, var(--red-deep) 100%);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:18px 0;
+  }
+  .report-tab span{
+    writing-mode:vertical-rl;
+    text-orientation:upright;
+    font-family:"Shippori Mincho", serif;
+    font-weight:700;
+    font-size:1rem;
+    letter-spacing:0.3em;
+    color:var(--paper);
+  }
+  .report-body{
+    flex:1;
+    min-width:0;
+    padding:24px 28px;
+  }
+  .report-body .eyebrow{margin:0 0 4px;}
+  .report-body h3{
+    font-size:1.3rem;
+    margin-bottom:8px;
+  }
+  .report-body p{
+    margin:0;
+    font-size:0.92rem;
+    color:var(--ink-soft);
+    max-width:56ch;
+  }
+  .report-arrow{
+    flex:none;
+    align-self:center;
+    padding:0 26px;
+    color:var(--red);
+    font-size:1.6rem;
+    transition:transform .15s ease;
+  }
+  .report-link:hover .report-arrow{transform:translateX(4px);}
+
   /* ---------- lightbox ---------- */
   .lightbox{
     position:fixed; inset:0; z-index:100;
@@ -418,6 +477,16 @@
     </div>
 
     <p class="gallery-note">各作品をクリック、またはEnterキーで拡大表示します。</p>
+
+    <a class="report-link" href="report1.html">
+      <span class="report-tab" aria-hidden="true"><span>特集</span></span>
+      <span class="report-body">
+        <p class="eyebrow">REPORT 01</p>
+        <h3>歌川国芳に関わる人物</h3>
+        <p>師・歌川豊国をはじめ、弟子や同時代の絵師、版元など、国芳をめぐる人々をまとめた特集ページです。</p>
+      </span>
+      <span class="report-arrow" aria-hidden="true">›</span>
+    </a>
   </div>
 </section>
 
