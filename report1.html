@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>歌川国芳に関わる人物 ── 国芳帖</title>
+<meta name="description" content="歌川国芳の師、同門、弟子、そして同時代の人々。名前・没年・解説でたどる人物一覧。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700;800&family=Noto+Serif+JP:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --sumi:#1d1c1a;
+    --ink:#2a2824;
+    --ink-soft:#5e5b54;
+    --paper:#e7e4de;
+    --paper-deep:#d7d3ca;
+    --paper-line:#c4bfb4;
+    --red:#a32a1f;
+    --red-deep:#7e2017;
+    --red-bright:#c43c28;
+    --max:1120px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"Noto Serif JP", serif;
+    line-height:1.9;
+    -webkit-font-smoothing:antialiased;
+  }
+  body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:0;
+    background-image:
+      repeating-linear-gradient(0deg, rgba(0,0,0,0.015) 0px, rgba(0,0,0,0.015) 1px, transparent 1px, transparent 3px),
+      repeating-linear-gradient(90deg, rgba(0,0,0,0.012) 0px, rgba(0,0,0,0.012) 1px, transparent 1px, transparent 3px);
+  }
+
+  a{color:inherit; text-decoration:none;}
+  h1,h2,h3{
+    font-family:"Shippori Mincho", serif;
+    font-weight:800;
+    margin:0;
+    color:var(--sumi);
+  }
+  .eyebrow{
+    font-family:"Cormorant Garamond", serif;
+    font-style:italic;
+    font-size:0.95rem;
+    letter-spacing:0.14em;
+    color:var(--red-deep);
+    margin:0 0 0.6em;
+  }
+  .wrap{max-width:var(--max); margin:0 auto; padding:0 28px;}
+
+  .seal{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:1.5em;
+    height:1.5em;
+    background:var(--red);
+    color:var(--paper);
+    font-family:"Shippori Mincho", serif;
+    font-size:0.85em;
+    font-weight:700;
+    border-radius:2px;
+    margin-right:0.45em;
+    transform:translateY(-0.05em) rotate(-2deg);
+    box-shadow:0 1px 0 rgba(0,0,0,0.25);
+  }
+
+  /* ---------- header (shared) ---------- */
+  .site-header{
+    position:sticky; top:0; z-index:40;
+    background:rgba(231,228,222,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--paper-line);
+  }
+  .header-inner{
+    max-width:var(--max); margin:0 auto; padding:14px 28px;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .brand{display:flex; align-items:center; gap:12px;}
+  .brand-seal{
+    width:38px; height:38px; flex:none;
+    background:var(--red);
+    color:var(--paper);
+    display:flex; align-items:center; justify-content:center;
+    font-family:"Shippori Mincho", serif; font-weight:800; font-size:1.15rem;
+    border-radius:3px;
+  }
+  .brand-text{font-family:"Shippori Mincho", serif; font-weight:800; font-size:1.15rem; color:var(--sumi); line-height:1.2;}
+  .brand-en{
+    display:block; font-family:"Cormorant Garamond", serif; font-style:italic;
+    font-weight:500; font-size:0.68rem; letter-spacing:0.16em; color:var(--ink-soft);
+  }
+  .site-nav{display:flex; gap:2px;}
+  .site-nav a{
+    font-family:"Shippori Mincho", serif;
+    font-size:0.95rem;
+    padding:8px 16px;
+    border-bottom:2px solid transparent;
+    color:var(--ink-soft);
+    transition:color .2s ease, border-color .2s ease;
+  }
+  .site-nav a:hover, .site-nav a:focus-visible{color:var(--sumi);}
+  .site-nav a.active{color:var(--red); border-color:var(--red);}
+  .nav-toggle{display:none;}
+
+  /* ---------- page head ---------- */
+  .page-head{padding:56px 0 20px;}
+  .page-head h1{
+    font-size:clamp(1.9rem, 4vw, 2.6rem);
+    display:flex;
+    align-items:center;
+  }
+  .page-head .lede{
+    max-width:62ch;
+    color:var(--ink-soft);
+    margin-top:18px;
+    font-size:1.02rem;
+  }
+  .back-link{
+    display:inline-block;
+    margin-top:22px;
+    font-family:"Shippori Mincho", serif;
+    font-size:0.9rem;
+    color:var(--ink-soft);
+    border-bottom:1px solid var(--paper-line);
+    transition:color .2s ease, border-color .2s ease;
+  }
+  .back-link:hover{color:var(--red); border-color:var(--red);}
+
+  /* ---------- people register ---------- */
+  .register{padding:20px 0 80px;}
+  .group{margin-top:44px;}
+  .group:first-child{margin-top:20px;}
+  .group-head{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    margin-bottom:6px;
+  }
+  .group-head h2{font-size:1.2rem; white-space:nowrap;}
+  .group-head::after{
+    content:"";
+    flex:1;
+    height:1px;
+    background:linear-gradient(90deg, var(--paper-line), transparent);
+  }
+
+  .person{
+    display:grid;
+    grid-template-columns:210px 1fr;
+    gap:12px 36px;
+    padding:26px 0;
+    border-bottom:1px solid var(--paper-line);
+  }
+  .person:last-child{border-bottom:none;}
+  .person-id h3{
+    font-size:1.35rem;
+    line-height:1.4;
+    margin-bottom:6px;
+  }
+  .person-id .died{
+    display:inline-block;
+    font-family:"Cormorant Garamond", serif;
+    font-style:italic;
+    font-size:0.95rem;
+    letter-spacing:0.06em;
+    color:var(--red-deep);
+    padding-left:12px;
+    border-left:2px solid var(--red);
+  }
+  .person p{
+    margin:0;
+    color:var(--ink-soft);
+    font-size:0.97rem;
+    max-width:60ch;
+  }
+
+  .register-note{
+    margin-top:30px;
+    font-family:"Cormorant Garamond", serif;
+    font-style:italic;
+    font-size:0.85rem;
+    color:var(--ink-soft);
+  }
+
+  /* ---------- footer (shared) ---------- */
+  .site-footer{
+    border-top:1px solid var(--paper-line);
+    background:var(--paper-deep);
+    padding:40px 0 28px;
+  }
+  .footer-inner{
+    max-width:var(--max); margin:0 auto; padding:0 28px;
+    display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:24px;
+  }
+  .footer-nav{display:flex; gap:18px; flex-wrap:wrap;}
+  .footer-nav a{font-size:0.9rem; color:var(--ink-soft); border-bottom:1px solid transparent;}
+  .footer-nav a:hover{color:var(--red); border-color:var(--red);}
+  .footer-credit{
+    font-family:"Cormorant Garamond", serif;
+    font-style:italic;
+    font-size:0.82rem;
+    color:var(--ink-soft);
+    letter-spacing:0.04em;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{transition:none !important;}
+  }
+
+  @media (max-width:760px){
+    .person{grid-template-columns:1fr; gap:8px;}
+  }
+
+  @media (max-width:680px){
+    .site-nav{
+      position:fixed; top:66px; right:0; left:0;
+      background:var(--paper);
+      border-bottom:1px solid var(--paper-line);
+      flex-direction:column;
+      padding:8px 28px 16px;
+      display:none;
+    }
+    .site-nav.open{display:flex;}
+    .site-nav a{padding:10px 4px; border-bottom:1px solid var(--paper-line);}
+    .nav-toggle{
+      display:block;
+      background:none; border:1px solid var(--sumi);
+      width:38px; height:38px;
+      color:var(--sumi);
+      font-size:1.1rem;
+      cursor:pointer;
+    }
+    .footer-inner{flex-direction:column; align-items:flex-start;}
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="index.html">
+      <span class="brand-seal" aria-hidden="true">芳</span>
+      <span class="brand-text">国芳帖<span class="brand-en">A KUNIYOSHI NOTEBOOK</span></span>
+    </a>
+    <nav class="site-nav" id="siteNav">
+      <a href="index.html">表紙</a>
+      <a href="gallery.html" class="active">画帖</a>
+      <a href="blog.html">日録</a>
+      <a href="about.html">来歴</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="メニューを開く" aria-expanded="false">☰</button>
+  </div>
+</header>
+
+<section class="page-head">
+  <div class="wrap">
+    <p class="eyebrow">REPORT 01</p>
+    <h1><span class="seal" aria-hidden="true">特</span>歌川国芳に関わる人物</h1>
+    <p class="lede">国芳を育てた師、肩を並べた同門や同時代の絵師、その画業を受け継いだ弟子たち。国芳をめぐる人々を、名前と没年、ひとこと解説で並べました。</p>
+    <a class="back-link" href="gallery.html">← 画帖にもどる</a>
+  </div>
+</section>
+
+<section class="register">
+  <div class="wrap">
+
+    <div class="group">
+      <div class="group-head"><h2>師と同門</h2></div>
+
+      <article class="person">
+        <div class="person-id">
+          <h3>歌川豊国(初代)</h3>
+          <span class="died">1825年没</span>
+        </div>
+        <p>国芳の師。役者絵で一世を風靡し、歌川派を江戸随一の絵師集団に押し上げた。国芳は若くしてその門に入り、絵の基礎を学んだ。</p>
+      </article>
+
+      <article class="person">
+        <div class="person-id">
+          <h3>歌川国貞(三代豊国)</h3>
+          <span class="died">1865年没</span>
+        </div>
+        <p>豊国門下で国芳の兄弟弟子にあたる。役者絵と美人画で絶大な人気を誇り、師の没後に豊国の名を継いだ。国芳とは同門の好敵手だった。</p>
+      </article>
+    </div>
+
+    <div class="group">
+      <div class="group-head"><h2>弟子たち</h2></div>
+
+      <article class="person">
+        <div class="person-id">
+          <h3>月岡芳年</h3>
+          <span class="died">1892年没</span>
+        </div>
+        <p>国芳門下の代表的な弟子。劇的で血なまぐさい「無残絵」で知られ、「最後の浮世絵師」とも呼ばれる。師の躍動感ある構図を受け継ぎつつ、明治の新しい表現へ進んだ。</p>
+      </article>
+
+      <article class="person">
+        <div class="person-id">
+          <h3>落合芳幾</h3>
+          <span class="died">1904年没</span>
+        </div>
+        <p>国芳門下の弟子で、芳年とは兄弟弟子。二人で手がけた残酷絵の連作が知られる。のちには新聞の錦絵など、時代の変化に合わせた仕事も行った。</p>
+      </article>
+
+      <article class="person">
+        <div class="person-id">
+          <h3>歌川芳艶</h3>
+          <span class="died">1866年没</span>
+        </div>
+        <p>国芳に学んだ弟子の一人。師ゆずりの力強い武者絵を得意とした。</p>
+      </article>
+
+      <article class="person">
+        <div class="person-id">
+          <h3>河鍋暁斎</h3>
+          <span class="died">1889年没</span>
+        </div>
+        <p>幼い頃に国芳のもとで絵を学んだのち、狩野派に進んだ。幕末から明治にかけて、風刺と諧謔に満ちた画風で独自の名声を得た。</p>
+      </article>
+    </div>
+
+    <div class="group">
+      <div class="group-head"><h2>同時代の人々</h2></div>
+
+      <article class="person">
+        <div class="person-id">
+          <h3>歌川広重</h3>
+          <span class="died">1858年没</span>
+        </div>
+        <p>国芳と同じ1797年生まれの歌川派の絵師。「東海道五十三次」をはじめとする風景画で名を残した。同世代でありながら、武者絵の国芳とは対照的な分野で活躍した。</p>
+      </article>
+
+      <article class="person">
+        <div class="person-id">
+          <h3>葛飾北斎</h3>
+          <span class="died">1849年没</span>
+        </div>
+        <p>同じ江戸の浮世絵界を代表する巨匠。大胆な構図や奇想に富んだ画風という点で、国芳としばしば並べて語られる存在。</p>
+      </article>
+
+      <article class="person">
+        <div class="person-id">
+          <h3>曲亭馬琴</h3>
+          <span class="died">1848年没</span>
+        </div>
+        <p>『南総里見八犬伝』などで知られる読本作者。馬琴らの作品が広めた水滸伝や八犬伝の人気は、国芳の武者絵が大きく開花する土壌となった。</p>
+      </article>
+
+      <article class="person">
+        <div class="person-id">
+          <h3>水野忠邦</h3>
+          <span class="died">1851年没</span>
+        </div>
+        <p>老中として天保の改革を主導した人物。質素倹約の名のもとに役者絵などが厳しく取り締まられ、国芳が戯画や風刺で規制をかいくぐる背景となった。</p>
+      </article>
+    </div>
+
+    <p class="register-note">※ 没年は西暦です。人物は今後も追加していきます。</p>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <nav class="footer-nav">
+      <a href="index.html">表紙</a>
+      <a href="gallery.html">画帖</a>
+      <a href="blog.html">日録</a>
+      <a href="about.html">来歴</a>
+    </nav>
+    <p class="footer-credit">A fan-made notebook on Utagawa Kuniyoshi, kept by Azalea72.</p>
+  </div>
+</footer>
+
+<script>
+  const navToggle = document.getElementById('navToggle');
+  const siteNav = document.getElementById('siteNav');
+  navToggle.addEventListener('click', () => {
+    const open = siteNav.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', open);
+  });
+</script>
+
+</body>
+</html>
